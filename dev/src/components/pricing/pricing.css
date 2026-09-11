@@ -1,0 +1,422 @@
+/* ================================================================
+   Raafat Coaching — pricing.css
+   قسم Pricing — الأسعار — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css الأساسية (--color-*, --font-*, --space-*, --fs-*, --radius-*, --transition-*...)
+   - متغيرات إضافية من style.css: --pattern-tape
+   - .pricing__inner: الـ max-width/padding العامة معرّفة في style.css،
+     هنا بس تخطيط الفليكس/الجريد الخاص بالقسم
+   ================================================================ */
+
+.pricing__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .pricing__cards { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+}
+
+.pricing__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-7) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.pricing__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: var(--space-6);
+  height: 3px;
+  background-image: var(--pattern-tape);
+}
+
+.pricing__card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* الكارت المميز (highlight: true في pricing.json) — حدود وتوهج بلون
+   الأكسنت الأساسي عشان يلفت النظر كـ"الاختيار الموصى بيه" */
+.pricing__card--highlight {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-accent-glow);
+}
+
+.pricing__badge {
+  position: absolute;
+  top: calc(-1 * var(--space-3));
+  inset-inline: 0;
+  width: fit-content;
+  margin-inline: auto;
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+}
+
+.pricing__plan {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.pricing__amount { margin-bottom: var(--space-6); }
+
+.pricing__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  font-family: var(--font-display-en);
+  font-size: var(--fs-3xl);
+  color: var(--color-text-primary);
+}
+
+.pricing__price-unit {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  color: var(--color-text-secondary);
+}
+
+.pricing__price-slash { color: var(--color-text-muted); }
+
+.pricing__price-usd-inline {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.pricing__price-location-note {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
+
+.pricing__features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  flex-grow: 1;
+}
+
+.pricing__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+
+.icon--check {
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+  margin-top: 2px;
+  padding: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-secondary-muted);
+  color: var(--color-accent-secondary);
+}
+
+/* ================================================================
+   أزرار إجراءات الكارت (واتساب مباشر + اشتراك سريع)
+   ================================================================ */
+.pricing__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.pricing__cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height-lg);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-weight: var(--fw-semibold);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.pricing__cta-btn:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+/* زرار "اشتراك سريع" — إجراء ثانوي بجانب زرار الواتساب، بيفتح نافذة الدفع */
+.pricing__quick-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--control-height-lg);
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: 1.5px solid var(--color-border-strong);
+  color: var(--color-text-primary);
+  font-weight: var(--fw-semibold);
+  transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+}
+
+.pricing__quick-btn:hover {
+  border-color: var(--color-accent-secondary);
+  background: var(--color-accent-secondary-muted);
+  transform: translateY(-2px);
+}
+
+
+/* ================================================================
+   نافذة الاشتراك السريع (Modal) — مشتركة بين كل الباقات، محتواها
+   بيتغيّر ديناميكيًا حسب الباقة المضغوطة (pricing.js)
+   ================================================================ */
+.subscribe-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .subscribe-modal {
+    align-items: center;
+    padding: var(--space-5);
+  }
+}
+
+.subscribe-modal[hidden] { display: none !important; }
+
+.subscribe-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+  backdrop-filter: blur(2px);
+}
+
+.subscribe-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 30rem;
+  max-height: min(88vh, 42rem);
+  overflow-y: auto;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-7) var(--space-6) var(--space-6);
+  box-shadow: var(--shadow-lg);
+  animation: subscribe-modal-in var(--transition-slow);
+}
+
+@media (min-width: 640px) {
+  .subscribe-modal__panel {
+    border-radius: var(--radius-lg);
+  }
+}
+
+@keyframes subscribe-modal-in {
+  from { transform: translateY(24px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.subscribe-modal__close {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.subscribe-modal__close:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.subscribe-modal__title {
+  font-size: var(--fs-xl);
+  padding-inline-end: var(--space-8);
+}
+
+.subscribe-modal__plan-name {
+  margin-top: var(--space-2);
+  color: var(--color-accent);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+}
+
+.subscribe-modal__steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--space-5) 0;
+  padding-inline-start: var(--space-5);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+}
+
+.subscribe-modal__methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.subscribe-modal__method {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height-md);
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  text-align: center;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+}
+
+.subscribe-modal__method:hover {
+  border-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.subscribe-modal__method--active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-muted);
+  color: var(--color-text-primary);
+}
+
+.subscribe-modal__account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  margin-bottom: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  border: 1px dashed var(--color-border-strong);
+}
+
+.subscribe-modal__account-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.subscribe-modal__account-label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.subscribe-modal__account-value {
+  font-family: var(--font-display-en);
+  font-size: var(--fs-md);
+  color: var(--color-text-primary);
+  overflow-wrap: anywhere;
+}
+
+.subscribe-modal__copy-btn {
+  flex-shrink: 0;
+  height: var(--control-height-sm);
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-primary);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.subscribe-modal__copy-btn:hover {
+  border-color: var(--color-accent);
+}
+
+.subscribe-modal__copy-btn--copied {
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.subscribe-modal__confirm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--control-height-lg);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-weight: var(--fw-semibold);
+  transition: background var(--transition-fast), opacity var(--transition-fast);
+}
+
+.subscribe-modal__confirm-btn:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.subscribe-modal__confirm-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* نافذة التأكيد الصغيرة (الخطوة الأخيرة) */
+.subscribe-modal--sm .subscribe-modal__panel {
+  max-width: 24rem;
+  text-align: center;
+}
+
+.subscribe-modal__note {
+  margin: var(--space-4) 0 var(--space-6);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+  line-height: var(--lh-relaxed);
+}
+
+.subscribe-modal__send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: var(--control-height-lg);
+  border-radius: var(--radius-full);
+  background: var(--color-accent-secondary);
+  color: var(--color-text-on-accent);
+  font-weight: var(--fw-semibold);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.subscribe-modal__send-btn:hover {
+  background: var(--color-accent-secondary-hover);
+  transform: translateY(-2px);
+}
+
+.subscribe-modal__send-btn .icon {
+  width: 1.2em;
+  height: 1.2em;
+}

@@ -1,0 +1,83 @@
+/* ================================================================
+   Raafat Coaching — how-it-works.css
+   قسم How It Works — كيف يعمل — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css الأساسية (--color-*, --font-*, --space-*, --fs-*, --radius-*, --transition-*...)
+   - متغيرات إضافية من style.css: --pattern-tape, --size-badge
+   - .how-it-works__inner: الـ max-width/padding العامة معرّفة في style.css،
+     هنا بس تخطيط الفليكس/الجريد الخاص بالقسم
+   ================================================================ */
+
+.how__steps {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+/* خط التقدّم الواصل بين الخطوات — على الموبايل عمودي جنب الأرقام */
+.how__steps::before {
+  content: "";
+  position: absolute;
+  top: var(--size-badge);
+  bottom: var(--size-badge);
+  inset-inline-start: calc(var(--size-badge) / 2 - 1px);
+  width: 2px;
+  background: var(--color-border);
+}
+
+.how__step {
+  position: relative;
+  padding-inline-start: calc(var(--size-badge) + var(--space-5));
+}
+
+.how__step-num {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  width: var(--size-badge);
+  height: var(--size-badge);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-elevated);
+  border: 1.5px solid var(--color-accent-secondary);
+  color: var(--color-accent-secondary);
+  font-family: var(--font-display-en);
+  font-size: var(--fs-lg);
+}
+
+.how__step-title {
+  font-size: var(--fs-lg);
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--space-2);
+}
+
+.how__step-text {
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 1024px) {
+  .how__steps { flex-direction: row; gap: var(--space-5); }
+
+  .how__steps::before {
+    top: calc(var(--size-badge) / 2 - 1px);
+    bottom: auto;
+    inset-inline: var(--space-5);
+    height: 2px;
+    width: auto;
+    background-image: var(--pattern-tape);
+    background-color: transparent;
+  }
+
+  .how__step {
+    flex: 1;
+    padding-inline-start: 0;
+    padding-top: calc(var(--size-badge) + var(--space-5));
+    text-align: start;
+  }
+
+  .how__step-num { inset-inline-start: 0; top: 0; }
+}

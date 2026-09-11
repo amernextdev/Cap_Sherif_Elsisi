@@ -1,0 +1,115 @@
+/* ================================================================
+   Raafat Coaching — about.css
+   قسم About — عن المدرب — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css الأساسية (--color-*, --font-*, --space-*, --fs-*, --radius-*, --transition-*...)
+   - متغيرات إضافية من style.css: --pattern-tape
+   - .about__inner: الـ max-width/padding العامة معرّفة في style.css،
+     هنا بس تخطيط الفليكس/الجريد الخاص بالقسم
+   ================================================================ */
+
+.about__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.about__portrait-frame {
+  position: relative;
+  max-width: 22rem;
+  margin-inline: auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.about__portrait-frame::after {
+  /* شريط القياس على حافة الإطار السفلية */
+  content: "";
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  height: 4px;
+  background-image: var(--pattern-tape);
+}
+
+.about__portrait-frame img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.about__portrait-annotation {
+  position: absolute;
+  bottom: var(--space-4);
+  inset-inline-end: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  max-width: calc(100% - var(--space-8));
+}
+
+.about__portrait-num {
+  font-family: var(--font-display-en);
+  font-size: var(--fs-xl);
+  color: var(--color-accent-secondary);
+}
+
+.about__portrait-label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-secondary);
+}
+
+.about__paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.about__paragraph {
+  padding-inline-start: var(--space-5);
+  border-inline-start: 3px solid var(--color-border-strong);
+}
+
+/* تلوين متبادل خفيف للحدّ الجانبي حسب طبيعة كل فقرة */
+.about__paragraph--philosophy { border-inline-start-color: var(--color-accent); }
+.about__paragraph--why { border-inline-start-color: var(--color-accent-secondary); }
+
+.about__paragraph-title {
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-2);
+}
+
+.about__paragraph-text {
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 1024px) {
+  .about__content {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-10);
+  }
+
+  /* على الديسكتوب: النص أول حاجة بصريًا (order: 1)، والصورة بعده
+     (order: 2) — بدل ما كانت نسختين منفصلتين في الـ HTML */
+  .about__paragraphs {
+    order: 1;
+    flex: 1;
+  }
+
+  .about__portrait-col {
+    order: 2;
+    flex: 0 0 34%;
+  }
+
+  .about__portrait-frame { max-width: none; }
+}

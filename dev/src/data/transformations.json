@@ -1,0 +1,34 @@
+{
+      "transformations": [
+    {
+      "id": 1,
+      "duration": "5 شهور معانا",
+      "beforeImage": "/transformations/one/before_1.{{extension}}",
+      "afterImage": "/transformations/one/after_1.{{extension}}"
+    },
+    {
+      "id": 2,
+      "duration": "3 شهور معانا",
+      "beforeImage": "/transformations/two/before_2.{{extension}}",
+      "afterImage": "/transformations/two/after_2.{{extension}}"
+    },
+    {
+      "id": 3,
+      "duration": "8 شهور معانا",
+      "beforeImage": "/transformations/three/before_3.{{extension}}",
+      "afterImage": "/transformations/three/after_3.{{extension}}"
+    },
+    {
+      "id": 4,
+      "duration": "12 شهر معانا",
+      "beforeImage": "/transformations/four/before_4.{{extension}}",
+      "afterImage": "/transformations/four/after_4.{{extension}}"
+    },
+    {
+      "id": 5,
+      "duration": "شهرين معانا",
+      "beforeImage": "/transformations/five/before_5.{{extension}}",
+      "afterImage": "/transformations/five/after_5.{{extension}}"
+    }
+  ]
+}

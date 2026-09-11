@@ -1,0 +1,255 @@
+/* ==============
+  Services CSS
+ ==============*/
+@import '/src/services/css/fonts.css';
+@import '/src/services/css/variables.css';
+
+/* ==============
+ Components CSS
+ ==============*/
+@import '/src/components/header/header.css';
+@import '/src/components/hero/hero.css';
+@import "/src/components/problem/problem.css";
+@import "/src/components/how-it-works/how-it-works.css";
+@import "/src/components/offer/offer.css";
+@import "/src/components/transformations/transformations.css";
+@import "/src/components/testimonials/testimonials.css";
+@import "/src/components/pricing/pricing.css";
+@import "/src/components/about/about.css";
+@import "/src/components/faq/faq.css";
+@import "/src/components/cta/cta.css";
+@import "/src/components/footer/footer.css";
+@import "/src/components/floating-actions/floating-actions.css";
+@import '/src/components/chatbot/chatbot.css';
+
+
+
+/* ============================================================
+   1. متغيرات إضافية عامة (مش موجودة أصلًا في variables.css)
+   ============================================================ */
+:root {
+  /* توهج بلون الليموني الثانوي — مطلوب لعناصر "النجاح/التقدم" (شارة
+     "بعد" في التحولات، حالة hover لبطاقات الأسعار) بما إن variables.css
+     فيه توهج برتقالي بس (--shadow-accent-glow) */
+  --shadow-accent-secondary-glow: 0 0 32px rgba(201, 255, 79, 0.25);
+
+  /* نمط "شريط القياس" — خط متقطع أفقي متكرر، عنصر التوقيع البصري للموقع
+     (إشارة لفكرة "القياس والتتبع" في التخسيس ونحت الجسم). يُستخدم في:
+     section-head، مجموعة إحصائيات الهيرو، بطاقة السعر، إطار صورة المدرب */
+  --pattern-tape: repeating-linear-gradient(
+    90deg,
+    var(--color-border-strong) 0 2px,
+    transparent 2px 9px
+  );
+
+  /* مقاس موحّد لكل الشارات الدائرية (أرقام/أيقونات) في الموقع:
+     hero stats، أرقام how-it-works، أيقونات offer، شارة صورة about */
+  --size-badge: 3.5rem; /* 56px */
+  --size-badge-lg: 4.5rem; /* 72px */
+}
+
+/* ملاحظة: الأرقام واللاتينية (٠١، +٥، 90%...) بتاخد font-family: var(--font-display-en)
+   مباشرة على كل عنصر يعرضها (hero__stat-badge, how__step-num, pricing__price...) —
+   إحساس "عداد/لوحة نتيجة" مختلف عن خط العناوين Lalezar، بدل ما نضيف class جديد
+   للـ HTML من غير داعي. */
+
+
+/* ============================================================
+   2. Reset / Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; margin: 0; padding: 0; }
+
+h1, h2, h3, p { margin: 0; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* حماية عامة: أي عنصر عليه hidden لازم يختفي فعليًا حتى لو فيه
+   display:flex/grid متعارض جاي من قاعدة تانية أخص */
+[hidden] { display: none !important; }
+
+/* التركيز بالكيبورد — واضح وموحّد لأي عنصر تفاعلي */
+a:focus-visible,
+button:focus-visible,
+[role="tab"]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+::selection { background: var(--color-accent); color: var(--color-text-on-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ============================================================
+   3. Typography & مكوّنات مشتركة
+   (Layout containers, section-head, section-end, icon)
+   ============================================================ */
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: var(--fw-regular); /* Lalezar واحد بس بوزنه الافتراضي */
+  line-height: var(--lh-tight);
+  color: var(--color-text-primary);
+}
+
+/* حاوية عامة لكل الأقسام — عرض أقصى موحّد.
+   ملاحظة: القائمة دي بتتسع لأي قسم جديد تضيفه — لو أضفت section جديد
+   بنفس نمط `.xxx__inner`، ضيفه هنا برضه بدل ما تكرر القواعد. */
+.header__inner,
+.hero__inner,
+.problem__inner,
+.how__inner,
+.offer__inner,
+.transformations__inner,
+.testimonials__inner,
+.pricing__inner,
+.about__inner,
+.faq__inner,
+.cta__inner,
+.footer__inner {
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-mobile);
+}
+
+@media (min-width: 768px) {
+  .header__inner,
+  .hero__inner,
+  .problem__inner,
+  .how__inner,
+  .offer__inner,
+  .transformations__inner,
+  .testimonials__inner,
+  .pricing__inner,
+  .about__inner,
+  .faq__inner,
+  .cta__inner,
+  .footer__inner {
+    padding-inline: var(--container-padding-desktop);
+  }
+}
+
+/* إيقاع رأسي موحّد بين الأقسام */
+.problem, .how, .offer, .transformations,
+.testimonials, .pricing, .about, .faq, .cta {
+  padding-block: var(--space-11);
+}
+
+@media (min-width: 1024px) {
+  .problem, .how, .offer, .transformations,
+  .testimonials, .pricing, .about, .faq, .cta {
+    padding-block: var(--space-12);
+  }
+}
+
+/* عنوان القسم القياسي (eyebrow + title) — مستخدم في كل الأقسام تقريبًا */
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 42rem;
+  margin-bottom: var(--space-9);
+}
+
+.section-head__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wider);
+  color: var(--color-accent);
+  margin: 0;
+}
+
+/* شريط القياس الصغير قبل كل eyebrow — أول ظهور لعنصر التوقيع البصري */
+.section-head__eyebrow::before {
+  content: "";
+  width: var(--space-8);
+  height: 3px;
+  background-image: var(--pattern-tape);
+  flex-shrink: 0;
+}
+
+.section-head__title {
+  font-size: var(--fs-2xl);
+}
+
+@media (min-width: 768px) {
+  .section-head__title { font-size: var(--fs-3xl); }
+}
+
+/* سطر ختامي صغير أسفل شبكة/قائمة كل قسم */
+.section-end {
+  margin-top: var(--space-8);
+  text-align: center;
+}
+
+.section-end__text {
+  color: var(--color-text-secondary);
+  font-size: var(--fs-md);
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+/* أيقونات sprite عامة — أي svg بكلاس icon جوه أي قسم بياخد المقاس ده */
+.icon {
+  width: 1.25em;
+  height: 1.25em;
+  fill: currentColor;
+}
+
+.mb-launcher {
+  display: none !important;
+}
+
+html {
+  overflow-x: hidden !important;
+}
+
+a, button, input, textarea, select, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+}
+a:focus, button:focus, input:focus, .card:focus {
+    outline: none;
+}
+a:focus-visible, button:focus-visible, .card:focus-visible {
+    outline: 2px solid var(--color-accent); 
+    outline-offset: 3px;
+}

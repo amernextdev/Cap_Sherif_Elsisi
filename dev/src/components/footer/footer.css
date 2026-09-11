@@ -1,0 +1,121 @@
+/* ================================================================
+   Raafat Coaching — footer.css
+   قسم Footer — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css الأساسية (--color-*, --font-*, --space-*, --fs-*, --radius-*, --transition-*...)
+   - .footer__inner: الـ max-width/padding العامة معرّفة في style.css،
+     هنا بس تخطيط الفليكس/الجريد الخاص بالقسم
+   ================================================================ */
+
+.footer {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+}
+
+/* موبايل: بدل عمود واحد طويل، الشعار والوصف في الأعلى بعرض كامل ومتوسّطين،
+   ومجموعتا الروابط جنب بعض في صفين بدل ما تترصّ فوق بعضها البعض */
+.footer__inner {
+  padding-block: var(--space-7);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: var(--space-5);
+  row-gap: var(--space-6);
+}
+
+/* أول عنصر في الـ footer (الشعار + الوصف) ياخد عرض السطر كامل ويترصّ في النص
+   مع خط فاصل خفيف تحته يفصله بصرياً عن مجموعات الروابط */
+.footer__inner > :first-child {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+}
+
+@media (min-width: 768px) {
+  .footer__inner {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: var(--space-6);
+    padding-block: var(--space-9);
+  }
+
+  .footer__inner > :first-child {
+    grid-column: auto;
+    text-align: start;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.footer__logo {
+  font-family: var(--font-display-en);
+  font-size: var(--fs-lg);
+  color: var(--color-text-primary);
+}
+
+.footer__tagline {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+}
+
+.footer__heading {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+  letter-spacing: var(--ls-wider);
+  margin-bottom: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .footer__heading {
+    margin-bottom: var(--space-4);
+  }
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+@media (min-width: 768px) {
+  .footer__links {
+    gap: var(--space-3);
+  }
+}
+
+.footer__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-sm);
+  transition: color var(--transition-fast);
+}
+
+.footer__links a:hover { color: var(--color-accent); }
+
+.footer__link-icon { width: 0.85em; height: 0.85em; }
+
+/* حقوق النشر: على الموبايل متوسّطة ومسافتها أصغر عشان القسم كله يبقى مضغوط،
+   وترجع لوضعها العادي (يمين المحاذاة الطبيعية) بداية من الديسكتوب */
+.footer__copyright {
+  grid-column: 1 / -1;
+  margin-top: var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  font-size: var(--fs-xs);
+  color: var(--color-text-disabled);
+  line-height: var(--lh-relaxed);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer__copyright {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    text-align: start;
+  }
+}
