@@ -77,7 +77,163 @@ function createPricingCard(item, template) {
   ctaBtn.textContent = item.ctaText ?? '';
   ctaBtn.href = item.whatsappLink ?? '#';
 
+  // زرار "اشتراك سريع" — بيفتح نافذة اختيار طريقة الدفع لنفس الباقة
+  const quickBtn = card.querySelector('.pricing__quick-btn');
+  quickBtn.addEventListener('click', () => {
+    openSubscribeModal({
+      id: item.id ?? '',
+      plan: item.plan ?? '',
+      priceEGP: item.priceEGP ?? '',
+    });
+  });
+
   return fragment;
+}
+
+/* ================================================================
+   نافذة "الاشتراك السريع" — منطق التحكم
+   ================================================================ */
+
+// مرجع الباقة المختارة حاليًا وطريقة الدفع المختارة، بيتحدّثوا كل ما
+// حد يفتح النافذة أو يختار طريقة دفع
+let currentPlan = null;
+let currentMethod = null;
+
+function getModalEls() {
+  return {
+    subscribeModal: document.getElementById('subscribe-modal'),
+    planName: document.getElementById('subscribe-modal-plan'),
+    methodsWrap: document.getElementById('subscribe-modal-methods'),
+    accountBox: document.getElementById('subscribe-modal-account'),
+    accountLabel: document.getElementById('subscribe-modal-account-label'),
+    accountValue: document.getElementById('subscribe-modal-account-value'),
+    copyBtn: document.getElementById('subscribe-modal-copy'),
+    confirmBtn: document.getElementById('subscribe-modal-confirm'),
+    confirmModal: document.getElementById('confirm-modal'),
+    sendBtn: document.getElementById('confirm-modal-send'),
+  };
+}
+
+function openModal(modalEl) {
+  modalEl.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(modalEl) {
+  modalEl.hidden = true;
+  // متفتحش الاسكرول تاني لو لسه في نافذة تانية شغالة
+  const anyOpen = document.querySelector('.subscribe-modal:not([hidden])');
+  if (!anyOpen) document.body.style.overflow = '';
+}
+
+function renderPaymentMethods(methodsWrap) {
+  const methods = pricingData?.paymentMethods ?? [];
+  methodsWrap.innerHTML = '';
+
+  methods.forEach((method) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'subscribe-modal__method';
+    btn.textContent = method.name;
+    btn.dataset.methodId = method.id;
+    btn.addEventListener('click', () => selectPaymentMethod(method));
+    methodsWrap.appendChild(btn);
+  });
+}
+
+function selectPaymentMethod(method) {
+  currentMethod = method;
+  const { methodsWrap, accountBox, accountLabel, accountValue, confirmBtn, copyBtn } = getModalEls();
+
+  // تحديث حالة "مُختار" بصريًا على الزرار المضغوط بس
+  methodsWrap.querySelectorAll('.subscribe-modal__method').forEach((btn) => {
+    btn.classList.toggle('subscribe-modal__method--active', btn.dataset.methodId === method.id);
+  });
+
+  accountLabel.textContent = `حوّل على ${method.name}${method.note ? ` (${method.note})` : ''}`;
+  accountValue.textContent = method.account ?? '';
+  accountBox.hidden = false;
+  copyBtn.textContent = 'نسخ';
+  copyBtn.classList.remove('subscribe-modal__copy-btn--copied');
+
+  confirmBtn.disabled = false;
+}
+
+function openSubscribeModal(plan) {
+  currentPlan = plan;
+  currentMethod = null;
+
+  const { subscribeModal, planName, methodsWrap, accountBox, confirmBtn } = getModalEls();
+
+  planName.textContent = `${plan.plan} — ${plan.priceEGP} جنيه`;
+  accountBox.hidden = true;
+  confirmBtn.disabled = true;
+
+  renderPaymentMethods(methodsWrap);
+  openModal(subscribeModal);
+}
+
+function buildWhatsappConfirmLink() {
+  const number = pricingData?.whatsappNumber ?? '';
+  const today = new Date().toLocaleDateString('ar-EG', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  const lines = [
+    'تم التحويل وعايز أفعّل اشتراكي 🔥',
+    `الباقة: ${currentPlan?.plan ?? ''}`,
+    `طريقة الدفع: ${currentMethod?.name ?? ''}`,
+    `تاريخ التحويل: ${today}`,
+    'سيتم إرفاق صورة التحويل مع هذه الرسالة.',
+  ];
+
+  const text = encodeURIComponent(lines.join('\n'));
+  return `https://wa.me/${number}?text=${text}`;
+}
+
+function initSubscribeModalEvents() {
+  const {
+    subscribeModal, confirmModal, confirmBtn, copyBtn,
+    accountValue, sendBtn,
+  } = getModalEls();
+
+  if (!subscribeModal || !confirmModal) return;
+
+  // إغلاق أي نافذة عند الضغط على الخلفية أو زرار الإغلاق
+  document.querySelectorAll('[data-modal-close]').forEach((el) => {
+    el.addEventListener('click', () => {
+      closeModal(subscribeModal);
+      closeModal(confirmModal);
+    });
+  });
+
+  // الهروب بالكيبورد (Esc) يقفل أي نافذة مفتوحة
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    closeModal(subscribeModal);
+    closeModal(confirmModal);
+  });
+
+  // نسخ رقم/حساب طريقة الدفع
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(accountValue.textContent ?? '');
+      copyBtn.textContent = 'تم النسخ ✓';
+      copyBtn.classList.add('subscribe-modal__copy-btn--copied');
+    } catch {
+      // لو الكليبورد مش متاح (متصفح قديم/إعدادات صلاحيات)، تجاهل بصمت
+    }
+  });
+
+  // "تأكيد الاشتراك" — الانتقال لنافذة إرسال السكرين شوت
+  confirmBtn.addEventListener('click', () => {
+    if (!currentMethod) return;
+    sendBtn.href = buildWhatsappConfirmLink();
+    closeModal(subscribeModal);
+    openModal(confirmModal);
+  });
 }
 
 /* ------------------------------------------------------------
@@ -102,4 +258,5 @@ export function initPricing() {
   if (!track || !template) return;
 
   renderPricingCards(track, template);
+  initSubscribeModalEvents();
 }

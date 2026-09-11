@@ -1,4 +1,21 @@
 {
+  "whatsappNumber": "201554069372",
+
+  "paymentMethods": [
+    {
+      "id": "instapay",
+      "name": "انستا باي",
+      "account": "sherif.elsisi@instapay",
+      "note": ""
+    },
+    {
+      "id": "wallet",
+      "name": "المحفظة الإلكترونية",
+      "account": "01554069372",
+      "note": "فودافون كاش / اتصالات كاش / أورنج كاش"
+    }
+  ],
+
   "pricing": [
     {
       "id": "package1",

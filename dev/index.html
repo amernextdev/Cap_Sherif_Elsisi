@@ -719,11 +719,77 @@
       <!-- سيتم حقن عناصر الـ li للمزايا هنا ديناميكياً -->
     </ul>
     
-    <a href="" class="pricing__cta-btn" target="_blank" rel="noopener noreferrer"></a>
+    <div class="pricing__actions">
+      <a href="" class="pricing__cta-btn" target="_blank" rel="noopener noreferrer"></a>
+      <button type="button" class="pricing__quick-btn">
+        <span>اشتراك سريع</span>
+      </button>
+    </div>
   </li>
 </template>
         <div class="section-end">
           <p class="section-end__text">مش عارف تختار إيه؟ كلمني على واتساب وهساعدك تحدد الأنسب لهدفك.</p>
+        </div>
+
+        <!-- =================================================================
+             نافذة "طريقة الاشتراك" — الخطوة الأولى (اختيار طريقة الدفع)
+             محتواها بيتغيّر ديناميكيًا حسب الباقة المختارة، وتُملأ طرق
+             الدفع من pricing.json (paymentMethods) عبر pricing.js
+        ================================================================== -->
+        <div class="subscribe-modal" id="subscribe-modal" hidden>
+          <div class="subscribe-modal__overlay" data-modal-close></div>
+          <div class="subscribe-modal__panel" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+            <button type="button" class="subscribe-modal__close" data-modal-close aria-label="إغلاق النافذة">
+              <svg class="icon icon--xmark" aria-hidden="true"><use href="/sprites/solid.svg#xmark"></use></svg>
+            </button>
+
+            <h3 class="subscribe-modal__title" id="subscribe-modal-title">طريقة الاشتراك</h3>
+            <p class="subscribe-modal__plan-name" id="subscribe-modal-plan"></p>
+
+            <ol class="subscribe-modal__steps">
+              <li>اختر طريقة الدفع</li>
+              <li>حوّل قيمة الباقة</li>
+              <li>اضغط "تأكيد الاشتراك"</li>
+              <li>أرسل Screenshot التحويل واسم الباقة</li>
+            </ol>
+
+            <!-- طرق الدفع بتتحقن هنا ديناميكيًا — أضف/احذف طريقة دفع من pricing.json فقط -->
+            <div class="subscribe-modal__methods" id="subscribe-modal-methods"></div>
+
+            <!-- بيانات الحساب الخاصة بطريقة الدفع المختارة -->
+            <div class="subscribe-modal__account" id="subscribe-modal-account" hidden>
+              <div class="subscribe-modal__account-text">
+                <span class="subscribe-modal__account-label" id="subscribe-modal-account-label"></span>
+                <span class="subscribe-modal__account-value" id="subscribe-modal-account-value"></span>
+              </div>
+              <button type="button" class="subscribe-modal__copy-btn" id="subscribe-modal-copy">نسخ</button>
+            </div>
+
+            <button type="button" class="subscribe-modal__confirm-btn" id="subscribe-modal-confirm" disabled>
+              تأكيد الاشتراك
+            </button>
+          </div>
+        </div>
+
+        <!-- =================================================================
+             نافذة التأكيد النهائية — إرسال السكرين شوت على واتساب
+        ================================================================== -->
+        <div class="subscribe-modal subscribe-modal--sm" id="confirm-modal" hidden>
+          <div class="subscribe-modal__overlay" data-modal-close></div>
+          <div class="subscribe-modal__panel" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
+            <button type="button" class="subscribe-modal__close" data-modal-close aria-label="إغلاق النافذة">
+              <svg class="icon icon--xmark" aria-hidden="true"><use href="/sprites/solid.svg#xmark"></use></svg>
+            </button>
+
+            <h3 class="subscribe-modal__title" id="confirm-modal-title">خطوة أخيرة</h3>
+            <p class="subscribe-modal__note">
+              ابعت صورة (Screenshot) التحويل على واتساب، وهيتفعّل اشتراكك ويتواصل معاك المدرب في أقرب وقت.
+            </p>
+            <a href="" target="_blank" rel="noopener noreferrer" class="subscribe-modal__send-btn" id="confirm-modal-send">
+              <svg class="icon" aria-hidden="true"><use href="/sprites/brands.svg#whatsapp"></use></svg>
+              إرسال السكرين شوت
+            </a>
+          </div>
         </div>
 
       </div>
