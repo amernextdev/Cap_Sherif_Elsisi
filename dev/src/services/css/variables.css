@@ -11,41 +11,41 @@
      ============================================================ */
 
   /* -- خلفيات -- */
-  --color-bg: #16140F;              /* خلفية الصفحة الأساسية */
-  --color-bg-elevated: #1B1912;     /* خلفية أقسام مرتفعة شوية عن الأساسية */
-  --color-surface: #211D17;         /* الكروت */
-  --color-surface-hover: #2A251C;   /* الكروت عند الـ hover */
-  --color-overlay: rgba(22, 20, 15, 0.75); /* طبقة فوق المودالز والـ popups */
+  --color-bg: #2B2B2E;              /* خلفية الصفحة الأساسية */
+  --color-bg-elevated: #313135;     /* خلفية أقسام مرتفعة شوية عن الأساسية */
+  --color-surface: #3A3A3E;         /* الكروت */
+  --color-surface-hover: #454549;   /* الكروت عند الـ hover */
+  --color-overlay: rgba(43, 43, 46, 0.75); /* طبقة فوق المودالز والـ popups */
 
   /* -- التمييز (Brand accents) -- */
-  --color-accent: #FF5A1F;              /* أساسي: أزرار، CTA، روابط مهمة */
-  --color-accent-hover: #E64F18;
-  --color-accent-active: #CC4614;
-  --color-accent-muted: rgba(255, 90, 31, 0.12); /* خلفية خفيفة فوق سطح غامق */
+  --color-accent: #FF2E2E;              /* أساسي: أزرار، CTA، روابط مهمة */
+  --color-accent-hover: #E62727;
+  --color-accent-active: #CC2222;
+  --color-accent-muted: rgba(255, 46, 46, 0.12); /* خلفية خفيفة فوق سطح غامق */
 
-  --color-accent-secondary: #C9FF4F;    /* ثانوي: بار التقدم، إنجازات، نجاح */
-  --color-accent-secondary-hover: #B8ED3E;
-  --color-accent-secondary-muted: rgba(201, 255, 79, 0.12);
+  --color-accent-secondary: #FF6B6B;    /* ثانوي: بار التقدم، إنجازات، نجاح — من نفس عيلة الأحمر عشان يفضل هو البطل */
+  --color-accent-secondary-hover: #FF8080;
+  --color-accent-secondary-muted: rgba(255, 107, 107, 0.12);
 
   /* -- النصوص -- */
-  --color-text-primary: #F5F1E8;    /* العناوين والنص الأساسي */
-  --color-text-secondary: #C7C2B5;  /* نص فرعي / وصفي */
-  --color-text-muted: #8C8779;      /* تلميحات، تسميات صغيرة، placeholders */
-  --color-text-on-accent: #16140F;  /* نص فوق الألوان الحيوية (برتقالي/ليموني) */
-  --color-text-disabled: #5A564B;
+  --color-text-primary: #F5F5F5;    /* العناوين والنص الأساسي */
+  --color-text-secondary: #C9C9CC;  /* نص فرعي / وصفي */
+  --color-text-muted: #B5B5B8;      /* تلميحات، تسميات صغيرة، placeholders */
+  --color-text-on-accent: #FFFFFF;  /* نص فوق الألوان الحيوية (الأحمر) */
+  --color-text-disabled: #6E6E72;
 
   /* -- الحدود -- */
-  --color-border: #3A362C;
-  --color-border-strong: #4A4638;
+  --color-border: #4A4A4E;
+  --color-border-strong: #5C5C61;
   --color-border-accent: var(--color-accent);
 
   /* -- ألوان دلالية (نجاح / تحذير / خطأ) -- */
-  --color-success: #C9FF4F;
-  --color-success-bg: rgba(201, 255, 79, 0.1);
+  --color-success: #4CD964;
+  --color-success-bg: rgba(76, 217, 100, 0.1);
   --color-warning: #F2A93B;
   --color-warning-bg: rgba(242, 169, 59, 0.1);
-  --color-danger: #E5484D;
-  --color-danger-bg: rgba(229, 72, 77, 0.1);
+  --color-danger: #FF2E2E;
+  --color-danger-bg: rgba(255, 46, 46, 0.1);
 
 
   /* ============================================================
@@ -126,8 +126,8 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
-  --shadow-accent-glow: 0 0 32px rgba(255, 90, 31, 0.25); /* توهج خلف عناصر الـ CTA */
-  --shadow-focus-ring: 0 0 0 3px rgba(255, 90, 31, 0.4);  /* حلقة التركيز لعناصر الإدخال */
+  --shadow-accent-glow: 0 0 32px rgba(255, 46, 46, 0.25); /* توهج خلف عناصر الـ CTA */
+  --shadow-focus-ring: 0 0 0 3px rgba(255, 46, 46, 0.4);  /* حلقة التركيز لعناصر الإدخال */
 
 
   /* ============================================================

@@ -5,7 +5,7 @@
     {
       "id": "instapay",
       "name": "انستا باي",
-      "account": "sherif.elsisi@instapay",
+      "account": "elsisi_1@instapay",
       "note": ""
     },
     {
@@ -21,8 +21,8 @@
       "id": "package1",
       "plan": "الباقة الأولى — شهر واحد",
       "priceEGP": "999",
-      "priceUSD": "",
-      "locationNote": "",
+      "priceUSD": "20",
+      "locationNote": "السعر بالدولار للعملاء خارج مصر",
       "highlight": false,
       "badge": "",
       "features": [
@@ -39,8 +39,8 @@
       "id": "package2",
       "plan": "الباقة الثانية — 3 شهور",
       "priceEGP": "2500",
-      "priceUSD": "",
-      "locationNote": "",
+      "priceUSD": "50",
+      "locationNote": "السعر بالدولار للعملاء خارج مصر",
       "highlight": true,
       "badge": "الأكثر طلبًا",
       "features": [
@@ -57,8 +57,8 @@
       "id": "package3",
       "plan": "الباقة الثالثة — 3 شهور",
       "priceEGP": "3000",
-      "priceUSD": "",
-      "locationNote": "",
+      "priceUSD": "60",
+      "locationNote": "السعر بالدولار للعملاء خارج مصر",
       "highlight": false,
       "badge": "",
       "features": [
