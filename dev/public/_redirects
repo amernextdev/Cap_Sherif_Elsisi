@@ -1,0 +1,17 @@
+# =====================================================================
+# Cloudflare Pages — _redirects
+# التوثيق: https://developers.cloudflare.com/pages/configuration/redirects/
+#
+# ملاحظة: الموقع صفحة واحدة (One Page) وكل الأقسام anchors
+# (#hero, #pricing...) في نفس index.html، فمفيش صفحات قديمة تحتاج
+# إعادة توجيه دلوقتي. الملف ده جاهز يتزوّد فيه أي redirect لاحقًا،
+# مثلاً لو اتغيّر الدومين أو اتضافت صفحة قديمة اتلغت.
+#
+# أمثلة جاهزة للاستخدام لو احتجتها مستقبلًا (متعلقة حاليًا):
+#
+# https://www.coachfarag.pages.dev/*  https://coachfarag.pages.dev/:splat  301!
+# /old-page  /new-page  301
+
+# ---------- Fallback: أي مسار مش موجود يرجّع صفحة 404 المخصصة
+#            بكود حالة 404 حقيقي (بدل الافتراضي) ----------
+/*  /404.html  404

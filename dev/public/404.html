@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>الصفحة مش موجودة | كوتش فراج</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#16140F">
+  <meta name="color-scheme" content="dark">
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --color-bg: #16140F;
+      --color-bg-elevated: #1B1912;
+      --color-surface: #211D17;
+      --color-accent: #FF5A1F;
+      --color-accent-hover: #E64F18;
+      --color-accent-secondary: #C9FF4F;
+      --color-text-primary: #F5F1E8;
+      --color-text-secondary: #C7C2B5;
+      --color-text-muted: #8C8779;
+      --color-text-on-accent: #16140F;
+      --color-border: #3A362C;
+      --font-display-ar: 'Lalezar', sans-serif;
+      --font-body-ar: 'IBM Plex Sans Arabic', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      font-family: var(--font-body-ar);
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* خلفية زخرفية خفيفة تطابق طابع الموقع */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(255, 90, 31, 0.14), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(201, 255, 79, 0.07), transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .top-logo {
+      position: relative;
+      z-index: 1;
+      padding: 1.75rem 1.5rem;
+    }
+
+    .top-logo a {
+      font-family: var(--font-display-ar);
+      font-size: 1.375rem;
+      color: var(--color-text-primary);
+      text-decoration: none;
+    }
+
+    .top-logo a .accent { color: var(--color-accent); }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .code {
+      font-family: var(--font-display-ar);
+      font-size: clamp(4.5rem, 18vw, 8rem);
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--color-accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-family: var(--font-display-ar);
+      font-weight: 400;
+      font-size: clamp(1.5rem, 4vw, 2.25rem);
+      margin-bottom: 0.85rem;
+    }
+
+    p {
+      color: var(--color-text-secondary);
+      font-size: 1.0625rem;
+      line-height: 1.8;
+      max-width: 32rem;
+      margin-bottom: 2.25rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      height: 3rem;
+      padding-inline: 1.75rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      transition: background 150ms ease, color 150ms ease, transform 150ms ease;
+    }
+
+    .btn--primary {
+      background: var(--color-accent);
+      color: var(--color-text-on-accent);
+    }
+
+    .btn--primary:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn--ghost {
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn--ghost:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-logo">
+    <a href="/" aria-label="العودة للصفحة الرئيسية"><span class="accent">كوتش</span> فراج</a>
+  </div>
+
+  <main class="wrap">
+    <div class="code">404</div>
+    <h1>الصفحة اللي بتدور عليها مش موجودة</h1>
+    <p>
+      يمكن الرابط اتغيّر أو اتكتب غلط. اضغط على أي زر تحت للرجوع
+      للصفحة الرئيسية أو للتواصل معانا مباشرة.
+    </p>
+
+    <div class="actions">
+      <a href="/" class="btn btn--primary">
+        الرجوع للرئيسية
+      </a>
+      <a href="https://wa.me/201501562624" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+        تواصل عبر واتساب
+      </a>
+    </div>
+  </main>
+
+</body>
+</html>

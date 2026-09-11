@@ -1,0 +1,313 @@
+/* ================================================================
+   Raafat Coaching — hero.css
+   قسم الهيرو (Hero) — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css: --space-*, --z-base, --color-*, --fs-*,
+     --lh-tight, --radius-*, --control-height-lg, --fw-semibold,
+     --shadow-accent-glow, --transition-fast/slow
+   - متغيرات من style.css: --size-badge (مقاس شارة .hero__stat-badge)
+   - .hero__inner: الـ max-width والـ padding-inline بتاعتها معرّفين أصلاً
+     في style.css ضمن قائمة الحاويات العامة — هنا بس تخطيط الفليكس/الجريد
+     الخاص بالهيرو (flex-direction, grid-template-columns, align-items...)
+
+   التخطيط:
+   - Mobile: عمودي بالكامل (نصوص فوق، الإحصائيات تحتها كروت مكدّسة)
+   - Desktop (1024px+): صفّين جنب بعض — النصوص من بداية السطر (يمين/شمال
+     حسب dir)، والإحصائيات في الجانب التاني كـ كروت مستطيلة شفافة نسبيًا
+     مكدّسة تحت بعضها، عشان صورة الخلفية تفضل بايّنة وراهم
+   ================================================================ */
+
+.hero {
+  position: relative;
+  padding-top: var(--space-9);
+  padding-bottom: var(--space-12);
+  overflow: clip;
+}
+
+.hero__background {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-base);
+}
+
+.hero__background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* تعتيم متدرّج فوق صورة الخلفية عشان النص يفضل واضح */
+.hero__background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, var(--color-bg) 0%, rgba(22, 20, 15, 0.55) 38%, var(--color-bg) 100%),
+    linear-gradient(0deg, var(--color-bg) 0%, transparent 30%);
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: start;
+  gap: var(--space-8);
+  padding-top: var(--space-9);
+}
+
+@media (min-width: 1024px) {
+  .hero__inner {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    align-items: center;
+    gap: var(--space-10);
+  }
+}
+
+.hero__main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: start;
+  gap: var(--space-5);
+  max-width: 34rem;
+  animation: heroRise var(--transition-slow) both;
+}
+
+@media (min-width: 1024px) {
+  .hero__main { max-width: none; }
+}
+
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero__title {
+  font-size: var(--fs-3xl);
+  line-height: var(--lh-tight);
+}
+
+.hero__title-accent {
+  color: var(--color-accent);
+  /* background: var(--color-accent-secondary); */
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-sm);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+@media (min-width: 768px) {
+  .hero__title { font-size: var(--fs-4xl); }
+}
+
+@media (min-width: 1280px) {
+  .hero__title { font-size: var(--fs-5xl); }
+}
+
+.hero__description {
+  font-size: var(--fs-md);
+  color: var(--color-text-secondary);
+  max-width: 34rem;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--control-height-lg);
+  padding-inline: var(--space-7);
+  margin-top: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-md);
+  box-shadow: var(--shadow-accent-glow);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero__cta:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.hero__cta:active { background: var(--color-accent-active); transform: translateY(0); }
+
+.hero__cta-icon {
+  transition: transform var(--transition-fast);
+}
+
+.hero__cta:hover .hero__cta-icon {
+  /* السهم بيتحرك عكس اتجاه القراءة العربي (لليسار) عشان يوحي بالتقدم للأمام */
+  transform: translateX(-4px);
+}
+
+/* عمود الإحصائيات — كروت مستقلة مكدّسة تحت بعضها (نفس الترتيب على
+   الموبايل والديسكتوب)، وبس مكان العمود نفسه بينتقل من تحت النصوص
+   (موبايل) لجنب النصوص (ديسكتوب) عن طريق .hero__inner فوق */
+.hero__stats {
+  width: 100%;
+  max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .hero__stats { justify-self: start; }
+}
+
+/* كارت مستطيل بسيط — خلفية شفافة نسبيًا عشان صورة الهيرو تفضل بايّنة وراه.
+   justify-content: space-between عشان البادچ يتفتح لأقصى الطرف المقابل
+   للنص بدل ما يفضل عالق جنبه بمسافة الـ gap بس */
+.hero__stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid color-mix(in srgb, var(--color-border-strong) 55%, transparent);
+  opacity: 0;
+  animation: heroRise var(--transition-slow) forwards;
+}
+
+.hero__stat[data-delay="0"] { animation-delay: 200ms; }
+.hero__stat[data-delay="1"] { animation-delay: 350ms; }
+.hero__stat[data-delay="2"] { animation-delay: 500ms; }
+
+.hero__stat-badge {
+  flex-shrink: 0;
+  width: var(--size-badge);
+  height: var(--size-badge);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+  border: 1.5px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-display-en);
+  font-size: var(--fs-lg);
+}
+
+.hero__stat-body { text-align: start; }
+
+.hero__stat-title {
+  font-size: var(--fs-sm);
+  font-family: var(--font-body);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+}
+
+.hero__stat-description {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
+
+
+@media (max-width: 1023.98px) {
+
+  .hero {
+    padding-top: var(--space-12);
+    min-height: calc(100svh - var(--header-height, 4.5rem));
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__inner {
+    padding-top: 0;
+    gap: var(--space-5);
+    width: 100%;
+  }
+
+  .hero__main {
+    display: contents;
+  }
+
+  .hero__title {
+    order: 1;
+    animation: heroRise var(--transition-slow) both;
+  }
+
+  .hero__description {
+    order: 2;
+    animation: heroRise var(--transition-slow) both;
+    animation-delay: 80ms;
+  }
+
+  .hero__cta {
+    order: 3;
+    align-self: center;
+    margin-inline: auto;
+    margin-top: var(--space-2);
+    animation: heroRise var(--transition-slow) both;
+    animation-delay: 140ms;
+  }
+
+  .hero__stats {
+    order: 4;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    max-width: none;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+  }
+
+  .hero__stat {
+    flex: 1 1 0;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-1);
+    padding: var(--space-3) var(--space-2);
+  }
+
+  .hero__stat-badge {
+    order: -1;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: var(--fs-sm);
+  }
+
+  .hero__stat-body { text-align: center; }
+
+  .hero__stat-title {
+    font-size: 0.6875rem;
+    line-height: 1.25;
+  }
+
+  .hero__stat-description {
+    display: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero__title {
+    font-size: var(--fs-2xl);
+  }
+
+  .hero__description {
+    font-size: var(--fs-sm);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero__title {
+    font-size: var(--fs-3xl);
+  }
+
+  .hero__description {
+    font-size: var(--fs-base);
+  }
+}

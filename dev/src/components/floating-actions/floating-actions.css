@@ -1,0 +1,142 @@
+/* ================================================================
+   Raafat Coaching — floating-actions.css
+   قسم Floating Actions — الأزرار العائمة — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css الأساسية (--color-*, --font-*, --space-*, --fs-*, --radius-*, --transition-*...)
+   - متغيرات إضافية من style.css: --size-badge
+   - .floating-actions__inner: الـ max-width/padding العامة معرّفة في style.css،
+     هنا بس تخطيط الفليكس/الجريد الخاص بالقسم
+   ================================================================ */
+
+.floating-actions {
+  position: fixed;
+  bottom: var(--space-5);
+  /* في RTL العنصر العائم بيتحط ناحية بداية السطر (يمين) بشكل مريح للإبهام */
+  inset-inline-start: var(--space-5);
+  z-index: var(--z-dropdown);
+}
+
+.floating-actions__toggle {
+  width: var(--size-badge);
+  height: var(--size-badge);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  box-shadow: var(--shadow-accent-glow);
+  transition: transform var(--transition-base), background var(--transition-fast);
+}
+
+.floating-actions__toggle:hover { background: var(--color-accent-hover); }
+
+.floating-actions__toggle[aria-expanded="true"] { transform: rotate(45deg); }
+
+/* القائمة بتطفو فوق زرار التبديل بدل ما تكون عضو عادي في نفس تدفق
+   الفليكس — بالشكل ده مكان الزرار يفضل ثابت 100% أيًا كانت حالة
+   القائمة (مفتوحة/مقفولة/بتتحرك)، ومفيش أي إزاحة مفاجئة ليه أبدًا.
+   .floating-actions نفسها position: fixed، وده كافٍ إنها تبقى
+   "containing block" للعنصر ده من غير أي إضافة تانية */
+.floating-actions__menu {
+  position: absolute;
+  bottom: calc(var(--size-badge) + var(--space-3));
+  inset-inline-start: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  animation: floatUp var(--transition-base) both;
+}
+
+/* حالة الغلق — بتتحط عبر JS (data-closing) قبل ما الـ hidden يتحط،
+   عشان أنيميشن الخروج ياخد وقته الكامل قبل ما العنصر يتشال من العرض خالص */
+.floating-actions__menu[data-closing] {
+  animation: floatDown var(--transition-base) forwards;
+}
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatDown {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(10px); }
+}
+
+.floating-actions__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.floating-actions__item,
+#my-custom-open-btn {
+  width: var(--control-height-lg);
+  height: var(--control-height-lg);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.floating-actions__item:hover,
+#my-custom-open-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+}
+
+.floating-actions__item--whatsapp { color: #25D366; }
+
+.social-panel {
+  position: fixed;
+  bottom: calc(var(--space-5) + var(--size-badge) + var(--space-3));
+  inset-inline-start: var(--space-5);
+  z-index: var(--z-dropdown);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 12rem;
+  overflow: hidden;
+}
+
+.social-panel__close {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-2) var(--space-2) 0;
+}
+
+.social-panel__close-btn {
+  width: var(--control-height-sm);
+  height: var(--control-height-sm);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.social-panel__close-btn:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.social-panel__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text-muted);
+}
+
+.social-panel__item a {
+  color: var(--color-text-primary);
+  font-size: var(--fs-sm);
+}
+
+.social-panel__item:hover { background: var(--color-surface-hover); }

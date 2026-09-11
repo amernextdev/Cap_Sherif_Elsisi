@@ -1,0 +1,150 @@
+/* ================================================================
+   Raafat Coaching — pricing.css
+   قسم Pricing — الأسعار — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css الأساسية (--color-*, --font-*, --space-*, --fs-*, --radius-*, --transition-*...)
+   - متغيرات إضافية من style.css: --pattern-tape
+   - .pricing__inner: الـ max-width/padding العامة معرّفة في style.css،
+     هنا بس تخطيط الفليكس/الجريد الخاص بالقسم
+   ================================================================ */
+
+.pricing__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .pricing__cards { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+}
+
+.pricing__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-7) var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.pricing__card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  inset-inline: var(--space-6);
+  height: 3px;
+  background-image: var(--pattern-tape);
+}
+
+.pricing__card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* الكارت المميز (highlight: true في pricing.json) — حدود وتوهج بلون
+   الأكسنت الأساسي عشان يلفت النظر كـ"الاختيار الموصى بيه" */
+.pricing__card--highlight {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-accent-glow);
+}
+
+.pricing__badge {
+  position: absolute;
+  top: calc(-1 * var(--space-3));
+  inset-inline: 0;
+  width: fit-content;
+  margin-inline: auto;
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+}
+
+.pricing__plan {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-5);
+}
+
+.pricing__amount { margin-bottom: var(--space-6); }
+
+.pricing__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  font-family: var(--font-display-en);
+  font-size: var(--fs-3xl);
+  color: var(--color-text-primary);
+}
+
+.pricing__price-unit {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  color: var(--color-text-secondary);
+}
+
+.pricing__price-slash { color: var(--color-text-muted); }
+
+.pricing__price-usd-inline {
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.pricing__price-location-note {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
+
+.pricing__features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  flex-grow: 1;
+}
+
+.pricing__features li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--color-text-secondary);
+}
+
+.icon--check {
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+  margin-top: 2px;
+  padding: 3px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-secondary-muted);
+  color: var(--color-accent-secondary);
+}
+
+.pricing__cta-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height-lg);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-weight: var(--fw-semibold);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.pricing__cta-btn:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-2px);
+}

@@ -1,0 +1,135 @@
+/* ================================================================
+   Raafat Coaching — testimonials.css
+   قسم Testimonials — آراء العملاء — مستخرج من main.css
+
+   التبعية:
+   - متغيرات variables.css الأساسية (--color-*, --font-*, --space-*, --fs-*, --radius-*, --transition-*...)
+   - .testimonials__inner: الـ max-width/padding العامة معرّفة في style.css،
+     هنا بس تخطيط الفليكس/الجريد الخاص بالقسم
+   ================================================================ */
+
+.testimonials__grid { display: flex; flex-direction: column; gap: var(--space-6); }
+
+.testimonials__row {
+  display: flex;
+  gap: var(--space-5);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--container-padding-mobile);
+  padding-bottom: var(--space-2);
+  /* إخفاء شريط التمرير بصريًا مع إبقائه شغالًا باللمس/الكيبورد */
+  scrollbar-width: none;
+}
+
+.testimonials__row::-webkit-scrollbar { display: none; }
+
+.testimonials__item {
+  flex: 0 0 min(320px, 84vw);
+  scroll-snap-align: center;
+}
+
+@media (min-width: 1024px) {
+  .testimonials__row {
+    overflow: visible;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials__item { flex: initial; }
+}
+
+.testimonials__item {
+  position: relative;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+/* علامة تنصيص كبيرة خافتة كخلفية زخرفية */
+.testimonials__item::before {
+  content: "\201C";
+  position: absolute;
+  top: var(--space-3);
+  inset-inline-end: var(--space-5);
+  font-family: var(--font-display-en);
+  font-size: 3.5rem;
+  line-height: 1;
+  color: var(--color-accent-muted);
+}
+
+.testimonials__quote {
+  position: relative;
+  color: var(--color-text-primary);
+  font-size: var(--fs-md);
+  margin-bottom: var(--space-5);
+}
+
+.testimonials__author {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.testimonials__author-name {
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+}
+
+.testimonials__author-meta {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+/* الزرار مخصص للديسكتوب بس — على الموبايل التنقّل بيحصل بالسحب/النقاط،
+   ومفيش داعي لزرار "عرض المزيد" إضافي يزوّد الزحمة */
+.testimonials__more-wrap { display: none; justify-content: center; }
+
+@media (min-width: 1024px) {
+  .testimonials__more-wrap { display: flex; }
+}
+
+.testimonials__more-btn {
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.testimonials__more-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.testimonials__dots {
+  margin-top: var(--space-6);
+
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.testimonials__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-border-strong);
+  transition: background var(--transition-fast), width var(--transition-fast);
+}
+
+.testimonials__dot--active {
+  background: var(--color-accent);
+  width: 22px;
+}
+
+/* نفس مبدأ قسم التحولات: النقاط دليل تنقّل للكاروسيل على الموبايل بس */
+@media (min-width: 1024px) {
+  .testimonials__dots {
+    display: none;
+  }
+}

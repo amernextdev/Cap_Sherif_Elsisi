@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ملاحظة: الموقع صفحة واحدة (One Page) وكل الأقسام عبارة عن ankers
+  (#hero, #problem, #offer...) مش صفحات مستقلة، فبالتالي الـ sitemap
+  بيحتوي على رابط الصفحة الرئيسية بس. لو اتضافت صفحات مستقلة مستقبلًا
+  (زي صفحة سياسة الخصوصية أو الشروط) ضيفها هنا كـ <url> جديد.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://coachfarag.pages.dev/</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

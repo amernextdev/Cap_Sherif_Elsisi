@@ -1,0 +1,288 @@
+/* ================================================================
+   Raafat Coaching — header + side-menu.css
+   الهيدر (Header) والقائمة الجانبية (Side Menu) — مستخرجة من main.css
+
+   التبعية: يعتمد على style.css (الأكواد العامة) اللي فيه:
+   - .icon { } — المقاس الأساسي لأي SVG، و.icon--xmark / .icon--globe
+     هنا بيضيفوا مقاس مخصص فوقه بس (override بسيط، مش تكرار).
+   - .header__inner — معرّفة أصلاً في style.css ضمن قائمة الحاويات
+     العامة (max-width + padding-inline)، هنا بس بنضيف تخطيط الفليكس
+     الخاص بالهيدر (display:flex, justify-content...).
+   ================================================================ */
+
+
+/* ============================================================
+   Header
+   ============================================================ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky-header);
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-4);
+}
+
+.header__logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.header__logo-text {
+  font-family: var(--font-display-ar);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-normal);
+  color: var(--color-text-primary);
+  line-height: 1;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* جزء "كوتش" ملوّن بلون العلامة عشان يدي إحساس شعار حقيقي مش مجرد نص عادي */
+.header__logo-text__accent {
+  color: var(--color-accent);
+}
+
+/* عند مرور الماوس: باقي الاسم ياخد لون العلامة كمان، بانتقال ناعم */
+.header__logo-link:hover .header__logo-text {
+  color: var(--color-accent);
+}
+
+.header__logo-link:hover .header__logo-text__accent {
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 480px) {
+  .header__logo-text { font-size: var(--fs-lg); }
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.header__menu-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-text-primary);
+  font-size: var(--fs-sm);
+  transition: color var(--transition-fast);
+}
+
+.header__menu-toggle:hover { color: var(--color-accent); }
+
+.header__menu-icon { width: 1.1em; height: 1.1em; }
+
+/* نص "القائمة" مخفي على الموبايل، أيقونة بس عشان نوفر مساحة */
+@media (max-width: 767px) {
+  .header__menu-text { display: none; }
+}
+
+.header__cta {
+  display: inline-flex;
+  align-items: center;
+  height: var(--control-height-sm);
+  padding-inline: var(--space-5);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-sm);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.header__cta:hover {
+  background: var(--color-accent-hover);
+  transform: translateY(-1px);
+}
+
+.header__cta:active { background: var(--color-accent-active); }
+
+@media (max-width: 767px) {
+  .header__cta { display: none !important; }
+}
+
+@media (max-width: 480px) {
+  .header__cta { padding-inline: var(--space-4); font-size: var(--fs-xs); }
+}
+
+
+/* ============================================================
+   Side Menu
+   ============================================================ */
+.side-menu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: var(--color-overlay);
+}
+
+.side-menu:not([hidden]) {
+  animation: fadeIn var(--transition-base) forwards;
+}
+
+/* حالة الغلق — بتتحط عبر JS (data-closing) قبل ما الـ hidden يتحط،
+   عشان أنيميشن الغلق ياخد وقته الكامل قبل ما العنصر يتشال من العرض خالص */
+.side-menu[data-closing] {
+  animation: fadeOut var(--transition-slow) forwards;
+}
+
+.side-menu__inner {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: min(360px, 88vw);
+  height: 100%;
+  background: var(--color-bg-elevated);
+  border-inline-end: 1px solid var(--color-border);
+  padding: var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  box-shadow: var(--shadow-lg);
+}
+
+.side-menu:not([hidden]) .side-menu__inner {
+  animation: slideInPanel var(--transition-slow) forwards;
+}
+
+.side-menu[data-closing] .side-menu__inner {
+  animation: slideOutPanel var(--transition-slow) forwards;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+@keyframes slideInPanel {
+  from { transform: translateX(var(--slide-from, 100%)); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideOutPanel {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--slide-from, 100%)); }
+}
+
+/* في صفحة LTR (لو اتفعّلت مستقبلًا) اللوحة تدخل/تخرج من الشمال بدل اليمين */
+[dir="ltr"] .side-menu__inner { --slide-from: -100%; }
+
+.side-menu__close { display: flex; justify-content: flex-end; }
+
+.side-menu__close-btn {
+  width: var(--control-height-sm);
+  height: var(--control-height-sm);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.side-menu__close-btn:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text-primary);
+}
+
+.icon--xmark { width: 1.1em; height: 1.1em; }
+
+.side-menu__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.side-menu__nav-link {
+  display: block;
+  padding-block: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+  transition: color var(--transition-fast), padding-inline-start var(--transition-fast);
+}
+
+.side-menu__nav-link:hover {
+  color: var(--color-accent);
+  padding-inline-start: var(--space-2);
+}
+
+.side-menu__nav-link.active {
+  color: var(--color-accent);
+  padding-inline-start: var(--space-2);
+}
+
+.side-menu__lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+}
+
+.side-menu__lang-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.icon--globe { width: 1.2em; height: 1.2em; color: var(--color-text-muted); }
+
+.side-menu__lang-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.side-menu__lang-title { font-size: var(--fs-xs); color: var(--color-text-muted); }
+.side-menu__lang-sub { font-size: var(--fs-sm); }
+
+.side-menu__lang-badges {
+  display: flex;
+  gap: var(--space-1);
+  background: var(--color-bg);
+  border-radius: var(--radius-full);
+  padding: 3px;
+}
+
+.side-menu__lang-badge {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+}
+
+.side-menu__lang-badge[data-lang="ar"] {
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+}
+
+.side-menu__cta { margin-top: auto; }
+
+.side-menu__cta-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height-lg);
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  color: var(--color-text-on-accent);
+  font-weight: var(--fw-semibold);
+  font-size: var(--fs-md);
+  transition: background var(--transition-fast);
+}
+
+.side-menu__cta-link:hover { background: var(--color-accent-hover); }
