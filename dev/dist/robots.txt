@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://sherifelsisi.pages.dev/sitemap.xml
