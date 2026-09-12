@@ -1,0 +1,5 @@
+# Cloudflare Pages — قواعد إعادة التوجيه
+# الموقع صفحة واحدة (One-Page) بأقسام Anchor، فمفيش مسارات تانية محتاجة rewrite
+
+# لو حد فتح الدومين بـ www واتضاف دومين مخصص للموقع لاحقًا، يتحول تلقائي للدومين الأساسي بدون www
+https://www.sherifelsisi.pages.dev/* https://sherifelsisi.pages.dev/:splat 301!
