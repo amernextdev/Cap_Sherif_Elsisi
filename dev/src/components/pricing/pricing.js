@@ -73,10 +73,6 @@ function createPricingCard(item, template) {
     featuresList.appendChild(createFeatureItem(feature));
   });
 
-  const ctaBtn = card.querySelector('.pricing__cta-btn');
-  ctaBtn.textContent = item.ctaText ?? '';
-  ctaBtn.href = item.whatsappLink ?? '#';
-
   // زرار "اشتراك سريع" — بيفتح نافذة اختيار طريقة الدفع لنفس الباقة
   const quickBtn = card.querySelector('.pricing__quick-btn');
   quickBtn.addEventListener('click', () => {
