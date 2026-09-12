@@ -1,0 +1,26 @@
+Solid Icons:
+
+arrow-up-right (⚠ غير موجود في السبريت - راجع الملاحظات)
+bars
+chart-line
+chevron-down
+comment-dots
+compass
+copy
+dumbbell
+envelope
+globe
+link
+plus
+robot
+triangle-exclamation
+utensils
+xmark
+
+Brands Icons:
+
+facebook
+instagram
+tiktok
+whatsapp
+youtube
