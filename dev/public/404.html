@@ -1,169 +1,128 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>الصفحة مش موجودة | شريف السيسي</title>
-  <meta name="robots" content="noindex, follow">
-  <meta name="theme-color" content="#2B2B2E">
-  <meta name="color-scheme" content="dark">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>الصفحة مش موجودة | شريف السيسي</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#2B2B2E">
+<meta name="color-scheme" content="dark">
 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lalezar&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#2B2B2E;
+    --surface:#3A3A3E;
+    --line:#4A4A4E;
+    --text:#F5F5F5;
+    --text-muted:#B5B5B8;
+    --accent:#FF2E2E;
+    --accent-hover:#E62727;
+    --on-accent:#FFFFFF;
+  }
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
 
-    html, body {
-      height: 100%;
-    }
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans Arabic', Tahoma, Arial, sans-serif;
+    line-height:1.85;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
 
-    body {
-      background: #2B2B2E;
-      color: #F5F5F5;
-      font-family: 'IBM Plex Sans Arabic', sans-serif;
-      min-height: 100dvh;
-      display: flex;
-      flex-direction: column;
-    }
+  .box{
+    max-width:560px;
+    width:100%;
+    text-align:center;
+  }
 
-    /* خلفية زخرفية خفيفة تطابق طابع الموقع */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 85% 10%, rgba(255, 46, 46, 0.14), transparent 45%),
-        radial-gradient(circle at 10% 90%, rgba(255, 107, 107, 0.07), transparent 40%);
-      pointer-events: none;
-      z-index: 0;
-    }
+  .code{
+    font-family:'Lalezar', 'IBM Plex Sans Arabic', sans-serif;
+    font-size:clamp(88px, 22vw, 140px);
+    line-height:1;
+    color:var(--accent);
+    margin:0 0 8px;
+    letter-spacing:.02em;
+  }
 
-    .top-logo {
-      position: relative;
-      z-index: 1;
-      padding: 1.75rem 1.5rem;
-    }
+  .box h1{
+    font-family:'Lalezar', 'IBM Plex Sans Arabic', sans-serif;
+    font-weight:400;
+    font-size:clamp(22px, 5vw, 30px);
+    margin:0 0 12px;
+    color:var(--text);
+  }
 
-    .top-logo a {
-      font-family: 'Lalezar', sans-serif;
-      font-size: 1.375rem;
-      color: #F5F5F5;
-      text-decoration: none;
-    }
+  .box p{
+    color:var(--text-muted);
+    font-size:15.5px;
+    margin:0 0 32px;
+  }
 
-    .top-logo a .accent { color: #FF2E2E; }
+  .actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:center;
+  }
 
-    .wrap {
-      position: relative;
-      z-index: 1;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 1.25rem 4rem;
-    }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:14.5px;
+    padding:13px 24px;
+    border-radius:10px;
+    transition:opacity .15s ease, background-color .15s ease;
+  }
 
-    .code {
-      font-family: 'Lalezar', sans-serif;
-      font-size: clamp(4.5rem, 18vw, 8rem);
-      line-height: 1;
-      color: transparent;
-      -webkit-text-stroke: 2px #FF2E2E;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
+  .btn-primary{
+    background:var(--accent);
+    color:var(--on-accent);
+  }
+  .btn-primary:hover{background:var(--accent-hover);}
 
-    h1 {
-      font-family: 'Lalezar', sans-serif;
-      font-weight: 400;
-      font-size: clamp(1.5rem, 4vw, 2.25rem);
-      margin-bottom: 0.85rem;
-    }
+  .btn-outline{
+    background:transparent;
+    color:var(--text);
+    border:1.5px solid var(--line);
+  }
+  .btn-outline:hover{border-color:var(--accent); color:var(--accent);}
 
-    p {
-      color: #C9C9CC;
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      max-width: 32rem;
-      margin-bottom: 2.25rem;
-    }
-
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      height: 3rem;
-      padding-inline: 1.75rem;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.9375rem;
-      text-decoration: none;
-      transition: background 150ms ease, color 150ms ease, transform 150ms ease;
-    }
-
-    .btn--primary {
-      background: #FF2E2E;
-      color: #FFFFFF;
-    }
-
-    .btn--primary:hover {
-      background: #E62727;
-      transform: translateY(-1px);
-    }
-
-    .btn--ghost {
-      background: #3A3A3E;
-      color: #F5F5F5;
-      border: 1px solid #4A4A4E;
-    }
-
-    .btn--ghost:hover {
-      border-color: #FF2E2E;
-      color: #FF2E2E;
-    }
-  </style>
+  .logo{
+    margin-top:44px;
+    font-family:'Lalezar', sans-serif;
+    font-size:15px;
+    color:var(--text-muted);
+    letter-spacing:.03em;
+  }
+</style>
 </head>
 <body>
 
-  <div class="top-logo">
-    <a href="/" aria-label="العودة للصفحة الرئيسية"><span class="accent">شريف  </span>السيسي</a>
-  </div>
-
-  <main class="wrap">
-    <div class="code">404</div>
+  <div class="box">
+    <p class="code">404</p>
     <h1>الصفحة اللي بتدور عليها مش موجودة</h1>
-    <p>
-      يمكن الرابط اتغيّر أو اتكتب غلط. اضغط على أي زر تحت للرجوع
-      للصفحة الرئيسية أو للتواصل معانا مباشرة.
-    </p>
+    <p>يمكن الرابط اتغيّر أو اتكتب غلط. ارجع للصفحة الرئيسية أو كلّمني على طول.</p>
 
     <div class="actions">
-      <a href="/" class="btn btn--primary">
-        الرجوع للرئيسية
-      </a>
-      <a href="https://wa.me/201554069372" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
-        تواصل عبر واتساب
-      </a>
+      <a class="btn btn-primary" href="/">ارجع للرئيسية</a>
+      <a class="btn btn-outline" href="https://wa.me/201554069372" target="_blank" rel="noopener">تواصل على واتساب</a>
     </div>
-  </main>
+
+    <div class="logo">شريف السيسي</div>
+  </div>
 
 </body>
 </html>
