@@ -141,26 +141,7 @@
   gap: var(--space-3);
 }
 
-.pricing__cta-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--control-height-lg);
-  border-radius: var(--radius-full);
-  background: transparent;
-  border: 1.5px solid var(--color-border-strong);
-  color: var(--color-text-primary);
-  font-weight: var(--fw-semibold);
-  transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
-}
-
-.pricing__cta-btn:hover {
-  border-color: var(--color-accent-secondary);
-  background: var(--color-accent-secondary-muted);
-  transform: translateY(-2px);
-}
-
-/* زرار "اشتراك سريع" — إجراء ثانوي بجانب زرار الواتساب، بيفتح نافذة الدفع */
+/* زرار "اشتراك سريع" — الإجراء الوحيد في الكارت، بيفتح نافذة الدفع */
 .pricing__quick-btn {
   display: flex;
   align-items: center;
